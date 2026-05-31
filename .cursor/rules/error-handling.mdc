@@ -1,0 +1,4 @@
+When a fetch to Weather's fails:
+- Log the city name, HTTP status, and error message at WARNING level
+- Do not raise the exception
+- Return None and skip that city for this poll cycle# Rule: error handling conventions

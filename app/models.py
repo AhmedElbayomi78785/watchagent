@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+#the structure of the data that will be entered
 class Reading(BaseModel):
     id: int | None = None
     city: str

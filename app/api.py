@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Query
 from app.db import init_db, get_readings, get_events, count_readings, count_events
 
+#once the app starts, the database starts
 @asynccontextmanager
 async def lifespan(app):
     init_db()
@@ -9,6 +10,7 @@ async def lifespan(app):
 
 app = FastAPI(lifespan=lifespan)
 
+#to verify that the API is working well
 @app.get("/health")
 def health():
     return {

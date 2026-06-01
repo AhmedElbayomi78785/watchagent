@@ -8,6 +8,7 @@ def setup():
     os.environ["DATABASE_URL"] = temp_db
     init_db()
 
+# test the data that will be entered device to check for duplication
 def test_deduplication():
     setup()
 

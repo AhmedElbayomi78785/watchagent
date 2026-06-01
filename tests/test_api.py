@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from app.db import init_db
 from app.api import app
 
+#database for testing
 def setup():
     os.environ["DATABASE_URL"] = tempfile.mktemp(suffix=".db")
     init_db()

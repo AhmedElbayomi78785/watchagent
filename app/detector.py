@@ -5,6 +5,7 @@ def detect_events(reading: dict, recent_readings: list) -> list:
     city, ts, rid = reading["city"], reading["timestamp"], reading.get("id")
     temp, wind, precip, code = reading["temperature_2m"], reading["wind_speed_10m"], reading["precipitation"], reading["weather_code"]
 
+#boundries with the data
     if temp >= 35:
         events.append({"city": city, "event_type": "extreme_heat", "description": f"Temperature reached {temp}°C", "severity": "high", "timestamp": ts, "reading_id": rid})
     elif temp <= -20:

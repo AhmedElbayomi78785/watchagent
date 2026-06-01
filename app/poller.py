@@ -16,6 +16,7 @@ INTERVAL = int(os.getenv("POLL_INTERVAL", 300))
 client = httpx.Client(timeout=10)
 
 
+# fetch current weather data from Open-Meteo API and convert it into our format
 def fetch_weather(city: dict) -> dict | None:
     try:
         r = client.get(
@@ -50,6 +51,7 @@ def fetch_weather(city: dict) -> dict | None:
         return None
 
 
+# fetch weather data for all cities and store readings and events in the database
 def poll():
     saved_count = 0
 
@@ -76,7 +78,7 @@ def poll():
 
     print(f"Saved {saved_count} weather readings.")
 
-
+#the part that starts the pool and keeps it running and updated every some time
 def main():
     init_db()
     print("Poller started")

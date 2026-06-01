@@ -6,6 +6,7 @@ def setup():
     os.environ["DATABASE_URL"] = tempfile.mktemp(suffix=".db")
     init_db()
 
+#test reading data
 def reading(temp=20.0, wind=10.0, precip=0.0, code=1):
     return {"id": 1, "city": "Ottawa", "timestamp": "2026-01-01T12:00",
             "temperature_2m": temp, "apparent_temperature": temp - 2,

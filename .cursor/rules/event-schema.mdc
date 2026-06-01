@@ -1,1 +1,9 @@
-# Rule: event schema conventions
+Every event MUST contain these fields:
+city: string (Ottawa | Toronto | Vancouver)
+event_type: string
+description: string
+severity: string (low | moderate | high | severe | extreme)
+timestamp: datetime
+reading_id: string (unique per reading)
+
+Each event type which will be added has its own description so if it's "storm" is means high wind and storm conditions and different event type was added just for giving a better understanding and view

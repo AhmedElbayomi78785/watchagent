@@ -11,7 +11,11 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "readings_stored": count_readings(), "events_stored": count_events()}
+    return {
+        "status": "ok",
+        "readings_stored": count_readings(),
+        "events_stored": count_events()
+    }
 
 @app.get("/readings")
 def readings(city: str = None, limit: int = Query(50)):

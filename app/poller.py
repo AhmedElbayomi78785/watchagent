@@ -39,22 +39,35 @@ def fetch_weather(city: dict) -> dict | None:
         return None
 
 def poll():
+    """Fetch and save weather data for all cities."""
+    saved_count = 0
+
     for city in CITIES:
         reading = fetch_weather(city)
+
         if not reading:
             continue
+
         reading_id = save_reading(reading)
+
         if reading_id:
+            saved_count += 1
             reading["id"] = reading_id
+
             recent = get_readings(city=city["name"], limit=1)
+
             for event in detect_events(reading, recent):
                 save_event(event)
 
+    print(f"Saved {saved_count} weather readings.")
+
 def main():
+    """Start the weather poller."""
     init_db()
     print("Poller started")
     while True:
         poll()
+        print(f"Waiting {INTERVAL} seconds until next poll...")
         time.sleep(INTERVAL)
 
 if __name__ == "__main__":

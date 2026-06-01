@@ -47,6 +47,8 @@ if everything is working:
 1st : uvicorn app.api:app --reload
 2nd (in a new terminal) : python -m app.poller
 then:
+
+#modifications for commit number 5
 http://127.0.0.1:8000/health     shows how many readings and events are stored
 http://127.0.0.1:8000/readings   shows the weather readings for all 3 cities
 http://127.0.0.1:8000/events     shows any if any weather events detected

@@ -104,11 +104,14 @@ def get_events(city=None, limit=50):
         return [dict(r) for r in rows]
 
 
-def count_readings():
+def _count_records(table):
     with db() as conn:
-        return conn.execute("SELECT COUNT(*) FROM readings").fetchone()[0]
+        return conn.execute(
+            f"SELECT COUNT(*) FROM {table}"
+        ).fetchone()[0]
 
+def count_readings():
+    return _count_records("readings")
 
 def count_events():
-    with db() as conn:
-        return conn.execute("SELECT COUNT(*) FROM events").fetchone()[0]
+    return _count_records("events")

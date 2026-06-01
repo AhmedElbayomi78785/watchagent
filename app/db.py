@@ -72,36 +72,26 @@ def save_event(event: dict):
         """, event)
 
 
-def get_readings(city=None, limit=50):
+def _fetch_records(table, city=None, limit=50):
     with db() as conn:
         if city:
             rows = conn.execute(
-                "SELECT * FROM readings WHERE city=? ORDER BY timestamp DESC LIMIT ?",
+                f"SELECT * FROM {table} WHERE city=? ORDER BY timestamp DESC LIMIT ?",
                 (city, limit)
             ).fetchall()
         else:
             rows = conn.execute(
-                "SELECT * FROM readings ORDER BY timestamp DESC LIMIT ?",
+                f"SELECT * FROM {table} ORDER BY timestamp DESC LIMIT ?",
                 (limit,)
             ).fetchall()
 
         return [dict(r) for r in rows]
 
+def get_readings(city=None, limit=50):
+    return _fetch_records("readings", city, limit)
 
 def get_events(city=None, limit=50):
-    with db() as conn:
-        if city:
-            rows = conn.execute(
-                "SELECT * FROM events WHERE city=? ORDER BY timestamp DESC LIMIT ?",
-                (city, limit)
-            ).fetchall()
-        else:
-            rows = conn.execute(
-                "SELECT * FROM events ORDER BY timestamp DESC LIMIT ?",
-                (limit,)
-            ).fetchall()
-
-        return [dict(r) for r in rows]
+    return _fetch_records("events", city, limit)
 
 
 def _count_records(table):

@@ -1,0 +1,41 @@
+name: CI
+
+# run this every time i push (only one branch)
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+# Github rents a virtual machine in the cloud to run this, it starts with nothing on it
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the code
+        uses: actions/checkout@v4
+
+# the virtual machine has no Python on it so install it
+      - name: Install Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+# install all the libraries needed like APIs and tests
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+ # run my 3 test files, if any test fails the whole thing goes red
+      - name: Run tests
+        env:
+          DATABASE_URL: sqlite:///./data/test.db
+        run: pytest tests/ -v
+
+  build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the code
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: docker build .

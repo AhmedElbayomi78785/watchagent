@@ -22,9 +22,13 @@ a storm or extreme cold. Everything is available through a simple API.
 ```
 
 ## Setup
-First clone the repo to the device
 git clone https://github.com/AhmedElbayomi78785/watchagent
 cd watchagent
+cp .env.example .env
+docker compose up --build
+Once it's running the API is at http://localhost:8000 and the poller starts collecting data automatically.
+*I've an issue as the docker file
+
 
 ----------------------------------------------------------
 Then install all the libraries the project needs to run and these are the ones i used
@@ -48,10 +52,17 @@ if everything is working:
 2nd (in a new terminal) : python -m app.poller
 then:
 
-#modifications for commit number 5
+# modifications for commit number 5
 http://127.0.0.1:8000/health     shows how many readings and events are stored
 http://127.0.0.1:8000/readings   shows the weather readings for all 3 cities
 http://127.0.0.1:8000/events     shows any if any weather events detected
+
+# API references
+curl http://127.0.0.1:8000/health
+
+curl "http://127.0.0.1:8000/readings?city=Ottawa&limit=10"
+
+curl "http://127.0.0.1:8000/events?city=Toronto&limit=10"
 
 -----------------------------------------------------------------------------
 
@@ -87,6 +98,17 @@ reading never gets saved twice by checking the city and timestamp before inserti
 **Skill:**
 `analyze_data.py` — a script I can run anytime to get a quick summary of how many
   readings and events are stored and what the latest ones are
+
+
+
+
+SQLite — simple enough for this project and persists easily with Docker volumes
+
+APScheduler — runs the polling every 5 minutes in the background
+
+httpx — handles the API calls to Open-Meteo and deals with timeouts cleanly
+
+
 
 ## Running Tests
 pip install pytest httpx fastapi

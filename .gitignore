@@ -5,3 +5,12 @@ data/
 .venv/
 *.egg-info/
 .pytest_cache/
+# these folders get created automatically when i run the code and tests,
+they are just garbage files that keep changing and have nothing to do with the
+actual project so no point pushing them to github. same for the database file it
+changes every poll
+
+__pycache__/
+.pytest_cache/
+*.pyc
+data/watchagent.db

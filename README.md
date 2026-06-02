@@ -26,8 +26,8 @@ git clone https://github.com/AhmedElbayomi78785/watchagent
 cd watchagent
 cp .env.example .env
 docker compose up --build
-Once it's running the API is at http://localhost:8000 and the poller starts collecting data automatically.
-*I've an issue as the docker file
+Once it's running the API is at http://127.0.0.1:8000 and the poller starts collecting data automatically.
+*I've an issue as the docker file on my device as it's running an old windows version that can't run the docker on my device but on any other device i added the docker-compose.yml so you'll be able to run it
 
 
 ----------------------------------------------------------
